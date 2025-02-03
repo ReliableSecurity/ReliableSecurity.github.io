@@ -1,0 +1,10 @@
+{
+    "2023": [
+        { "name": "CVE-2023-001.pdf", "path": "pdf/2023/CVE-2023-001.pdf" },
+        { "name": "CVE-2023-002.pdf", "path": "pdf/2023/CVE-2023-002.pdf" }
+    ],
+    "2024": [
+        { "name": "CVE-2024-001.pdf", "path": "pdf/2024/CVE-2024-001.pdf" },
+        { "name": "CVE-2024-002.pdf", "path": "pdf/2024/CVE-2024-002.pdf" }
+    ]
+}

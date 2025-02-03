@@ -92,34 +92,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-# JSON файл с тестовыми данными
-json_content = """{
-    "2023": [
-        {"name": "CVE-2023-001.pdf", "path": "pdf/2023/CVE-2023-001.pdf"},
-        {"name": "CVE-2023-002.pdf", "path": "pdf/2023/CVE-2023-002.pdf"}
-    ],
-    "2024": [
-        {"name": "CVE-2024-001.pdf", "path": "pdf/2024/CVE-2024-001.pdf"}
-    ]
-}"""
-
-# Создаём нужные файлы
-with open(f"{project_name}/index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-with open(f"{project_name}/files.json", "w", encoding="utf-8") as f:
-    f.write(json_content)
-
-# Создаём папки для PDF
-os.makedirs(f"{project_name}/pdf/2023", exist_ok=True)
-os.makedirs(f"{project_name}/pdf/2024", exist_ok=True)
-
-# Создаём архив
-shutil.make_archive(project_name, 'zip', project_name)
-
-# Путь к архиву
-archive_path = f"{project_name}.zip"
-archive_path
-

@@ -1,30 +1,45 @@
-<!DOCTYPE html>
+import shutil
+import os
+
+# Создаём структуру папок для архива
+project_name = "pentest_archive_site"
+os.makedirs(f"{project_name}", exist_ok=True)
+
+# HTML файл (основной код уже обновлён)
+html_content = """<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Архив уязвимостей</title>
+    <title>Пентест Архив</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'VT323', monospace;
+            background-color: #0d0d0d;
+            color: #33ff33;
             text-align: center;
+            padding: 20px;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: white;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #33ff33;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px #33ff33;
         }
         h1 {
-            color: #333;
+            color: #33ff33;
+            text-shadow: 0 0 10px #33ff33;
         }
         .year {
             margin-top: 20px;
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: bold;
+            color: #ff3333;
+            text-shadow: 0 0 8px #ff3333;
         }
         .file-list {
             list-style: none;
@@ -35,13 +50,18 @@
         }
         a {
             text-decoration: none;
-            color: #007bff;
+            color: #33ff33;
+            transition: 0.3s;
+        }
+        a:hover {
+            color: #ff3333;
+            text-shadow: 0 0 10px #ff3333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Архив уязвимостей</h1>
+        <h1>Пентест Архив</h1>
         <div id="file-container">Загрузка файлов...</div>
     </div>
     
@@ -72,4 +92,34 @@
     </script>
 </body>
 </html>
+"""
+
+# JSON файл с тестовыми данными
+json_content = """{
+    "2023": [
+        {"name": "CVE-2023-001.pdf", "path": "pdf/2023/CVE-2023-001.pdf"},
+        {"name": "CVE-2023-002.pdf", "path": "pdf/2023/CVE-2023-002.pdf"}
+    ],
+    "2024": [
+        {"name": "CVE-2024-001.pdf", "path": "pdf/2024/CVE-2024-001.pdf"}
+    ]
+}"""
+
+# Создаём нужные файлы
+with open(f"{project_name}/index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+with open(f"{project_name}/files.json", "w", encoding="utf-8") as f:
+    f.write(json_content)
+
+# Создаём папки для PDF
+os.makedirs(f"{project_name}/pdf/2023", exist_ok=True)
+os.makedirs(f"{project_name}/pdf/2024", exist_ok=True)
+
+# Создаём архив
+shutil.make_archive(project_name, 'zip', project_name)
+
+# Путь к архиву
+archive_path = f"{project_name}.zip"
+archive_path
 

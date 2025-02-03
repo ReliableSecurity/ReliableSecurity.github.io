@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив уязвимостей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .year {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-list li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Архив уязвимостей</h1>
+        <div id="file-container">Загрузка файлов...</div>
+    </div>
+    
+    <script>
+        async function loadFiles() {
+            const response = await fetch('files.json');
+            const data = await response.json();
+            let container = document.getElementById('file-container');
+            container.innerHTML = '';
+            
+            for (const year in data) {
+                let section = document.createElement('div');
+                section.innerHTML = `<div class='year'>${year}</div>`;
+                let list = document.createElement('ul');
+                list.classList.add('file-list');
+                
+                data[year].forEach(file => {
+                    let listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="${file.path}" target="_blank">${file.name}</a>`;
+                    list.appendChild(listItem);
+                });
+                
+                section.appendChild(list);
+                container.appendChild(section);
+            }
+        }
+        loadFiles();
+    </script>
+</body>
+</html>
+
